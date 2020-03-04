@@ -7,18 +7,17 @@
 |email|string|null: false|
 |password|string|null: false|
 ### Association
-- has_many :group
+- has_many :group, through :groups_users
 - has_many :messages
-- has_many through :groups_users
+
 
 ## groupテーブル
 |Column|Type|Options|
 |------|----|-------|
 |group_name|string|null: false|
 ### Association
-- has_many :users
 - has_many :message
-- has_many through :groups_users
+- has_many :users, through :groups_users
 
 ## groups_usersテーブル
 |Column|Type|Options|
