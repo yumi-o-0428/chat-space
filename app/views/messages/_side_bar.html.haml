@@ -2,13 +2,13 @@
   .side-bar__side-header
     .side-bar__side-header--box
       .side-bar__side-header--box__name
-        ねこ
+        = current_user.name
       %ul.menu
         %li
         = link_to "#", class: "side-bar__ide-header--box__icons--edit" do
           = icon('far', 'edit',  class: "side-bar__ide-header--box__icons")
         %li.menu__list
-        = link_to "#", class: "side-bar__ide-header--box__icons--cog" do
+        = link_to edit_user_path(current_user), class: "side-bar__ide-header--box__icons--cog" do
           = icon('fas', 'cog',  class: "side-bar__ide-header--box__icons")
   .side-bar__group
     .side-bar__group--box
