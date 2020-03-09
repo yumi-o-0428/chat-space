@@ -1,37 +1,24 @@
 .chat-main
   .chat-main__main-header
     .chat-main__main-header--left-box
-      %h.group-mane
-        ねこが可愛い会
+      .group-mane
+        //ねこが可愛い会
+        = @group.name
         %ul.members
           Menber：
-          %li.member-first
-            ロシアンブルー
-          %li.member-second
-            マンチカン
-          %li.member-third
-            ベンガル
-    =link_to "#", class: "edit-btn" do
+          //neko
+          %li.member-list
+            - @group.group_users.each do |group_user|
+              = group_user.user.name
+    =link_to edit_group_path(@group), class: "edit-btn" do
       Edit
   .chat-main__message
-    .chat-main__message-box
-      .chat-main__message-box-name
-        ねこ太郎
-        .chat-main__message-box-date
-          2020/03/6(Fri) 13:23
-      .chat-main__message-box-text
-        ひたすら寝ています。
-      .chat-main__message-box-name
-        いぬ太郎
-        .chat-main__message-box-date
-          2020/03/6(Fri) 14:21
-      .chat-main__message-box-text
-        こちらもひたすら寝ています。
+    = render @messages
   .form
-    %form.new-message
+    =form_for [@group, @message] do |f|
+      = f.text_field :content, placeholder:"type a message" , class:"input-box__text" 
       .input-box
-        %input{type:"text" , placeholder:"type a message" , class:"input-box__text" }
-        %label{class: "input-box__image"}
+        =f.label :image, class: "input-box__image" do
           = icon('far', 'image')
-          %input{type: "file",class:"input-box__image-file"}
-      %input{type:"submit" , value:"Send" ,class:"submit"}
+          =f.file_field :image, class:"input-box__image-file"
+      = f.submit value:"Send", class:"submit"
