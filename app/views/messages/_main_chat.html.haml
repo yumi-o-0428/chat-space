@@ -5,8 +5,8 @@
         = @group.name
         %ul.members
           Menber：
-          - @group.group_users.each do |group_user|
-            %li.member-list
+          %li.member-list
+            - @group.group_users.each do |group_user|
               = group_user.user.name
     =link_to edit_group_path(@group), class: "edit-btn" do
       Edit
@@ -19,4 +19,4 @@
         =f.label :image, class: "input-box__image" do
           = icon('far', 'image')
           =f.file_field :image, class:"input-box__image-file"
-      = f.submit value:"Send", class:"submit"
+      = f.submit "Send", class:"submit"

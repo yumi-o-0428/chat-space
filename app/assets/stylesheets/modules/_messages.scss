@@ -126,9 +126,9 @@ $btnColor: #38aef0;
     height: calc(100vh - 190px);
     background-color: #fafafa;
     padding: 40px 46px;
+    overflow: scroll;
 
     &-box{
-      
 
       &-name{
         color: #333333;
