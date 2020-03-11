@@ -2,11 +2,9 @@
   .chat-main__main-header
     .chat-main__main-header--left-box
       .group-mane
-        //ねこが可愛い会
         = @group.name
         %ul.members
           Menber：
-          //neko
           %li.member-list
             - @group.group_users.each do |group_user|
               = group_user.user.name
@@ -21,4 +19,4 @@
         =f.label :image, class: "input-box__image" do
           = icon('far', 'image')
           =f.file_field :image, class:"input-box__image-file"
-      = f.submit value:"Send", class:"submit"
+      = f.submit "Send", class:"submit"
