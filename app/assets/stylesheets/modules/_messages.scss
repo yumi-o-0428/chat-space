@@ -125,9 +125,10 @@ $btnColor: #38aef0;
   &__message{
     height: calc(100vh - 190px);
     background-color: #fafafa;
+    padding: 40px 46px;
 
     &-box{
-      padding: 40px 46px;
+      
 
       &-name{
         color: #333333;
@@ -162,7 +163,6 @@ $btnColor: #38aef0;
       display: flex;
       
       .input-box{
-        width: 100%;
         display: flex;
         position: relative;
     
