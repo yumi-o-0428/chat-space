@@ -1,40 +1,26 @@
 $(function(){
     function buildHTML(message){
-      if ( message.image ){
-        var html =
-          `<div class= "chat-main__message-box">
-            <div class= "chat-main__message-box-name">
-              ${message.user_name}
-              <div class="chat-main__message-box-date">
-                ${message.created_at}
-              </div>
-            </div>
-            <div class="chat-main__message-box-text">
-              <div class="chat-main__message-box-text__content">
-                ${message.content}
-              </div>
-            </div>
-            <img src=${message.image}>
-          </div>`
-        return html;
-      } else {
-        var html =
-        `<div class= "chat-main__message-box">
-          <div class= "chat-main__message-box-name">
-            ${message.user_name}
-            <div class="chat-main__message-box-date">
-              ${message.created_at}
-            </div>
+      image = (message.image !== null) ? `<imag class = "hat-main__message-box-text__content__image" src=${message.image} >` : "";
+    
+      var html = 
+      `<div class ="message" data-message-id ="${message.id }">
+      <div class= "chat-main__message-box">
+        <div class= "chat-main__message-box-name">
+          ${message.user_name}
+          <div class="chat-main__message-box-date">
+          ${message.created_at}
           </div>
-          <div class="chat-main__message-box-text">
-            <div class="chat-main__message-box-text__content">
-              ${message.content}
-            </div>
+        </div>
+        <div class="chat-main__message-box-text">
+          <div class="chat-main__message-box-text__content">
+            ${message.content}
           </div>
-        </div>`
+          <img src="${image }"> 
+        </div>
+      </div>`
         return html;
       };
-    }
+    
 
 $('#new_message').on('submit', function(e){
   e.preventDefault();
@@ -59,4 +45,34 @@ $('#new_message').on('submit', function(e){
     alert("メッセージ送信に失敗しました");
   });
 })
+
+  
+  //自動更新
+  var reloadMessages = function(){
+    var last_message_id = $('.message:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages){
+      console.log(messages)
+      if(messages.length !== 0 ){
+        var insertHTML ='';
+        $.each(messages,function(i,message){
+          insertHTML += buildHTML(message)
+        });
+        $('.chat-main__message').append(insertHTML);
+        $('.chat-main__message').animate({ scrollTop: $('.chat-main__message')[0].scrollHeight});
+      }
+    })
+    .fail(function(){
+      alert('error');
+    });
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
+
 });
