@@ -44,6 +44,7 @@ $('#new_message').on('submit', function(e){
   })
   .fail(function(){
     alert("メッセージ送信に失敗しました");
+    $('.submit').prop('disabled', false);
   });
 })
 
@@ -75,5 +76,4 @@ $('#new_message').on('submit', function(e){
   if (document.location.href.match(/\/groups\/\d+\/messages/)) {
     setInterval(reloadMessages, 7000);
   }
-
 });
