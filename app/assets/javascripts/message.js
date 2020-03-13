@@ -1,6 +1,6 @@
 $(function(){
     function buildHTML(message){
-      image = (message.image !== null) ? `<imag class = "hat-main__message-box-text__content__image" src=${message.image} >` : "";
+    var image = (message.image !== null) ? `<img class = "chat-main__message-box-text__content__image" src=${message.image} >` : "";
     
       var html = 
       `<div class ="message" data-message-id ="${message.id }">
@@ -15,7 +15,7 @@ $(function(){
           <div class="chat-main__message-box-text__content">
             ${message.content}
           </div>
-          <img src="${image }"> 
+          ${image}
         </div>
       </div>`
         return html;
@@ -36,6 +36,7 @@ $('#new_message').on('submit', function(e){
   })
   .done(function(data){
     var html = buildHTML(data);
+    console.table(data)
     $('.chat-main__message').append(html);
     $('.chat-main__message').animate({ scrollTop: $('.chat-main__message')[0].scrollHeight});
     $('form')[0].reset();
